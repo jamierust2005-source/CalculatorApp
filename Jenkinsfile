@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Clean workspace') {
+            steps {
+                deleteDir()   // built-in: wipes the workspace folder
+            }
+        }
 
         stage('Checkout') {
             steps {
