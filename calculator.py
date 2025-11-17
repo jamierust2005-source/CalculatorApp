@@ -15,3 +15,4 @@ def power(a, b):
 if __name__ == "__main__":
     print("--- Calculator App ---")
     print(add(2, 2))
+    print(subtract(5, 3))
