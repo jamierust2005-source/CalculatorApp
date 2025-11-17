@@ -4,6 +4,8 @@ FROM jenkins/jenkins:lts-jdk17
 # Switch to root to install packages
 USER root
 
+RUN apt-get update && apt-get install -y docker.io && rm -rf /var/lib/apt/lists/*
+
 # Install Python 3, pip, and any build tools you might need
 RUN apt-get update && \
     apt-get install -y python3 python3-pip python3-venv && \
