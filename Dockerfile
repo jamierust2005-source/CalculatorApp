@@ -1,5 +1,6 @@
 FROM jenkins/jenkins:lts-jdk17
 
+# Run everything as root
 USER root
 
 # Install Python + pip + pytest + Docker CLI
@@ -11,12 +12,7 @@ RUN apt-get update && \
         docker.io && \
     rm -rf /var/lib/apt/lists/*
 
-# Install pytest via pip (container-only, safe to break system packages)
+# Install pytest
 RUN pip3 install --break-system-packages --no-cache-dir pytest
-
-# Make sure Jenkins user can talk to Docker
-RUN groupadd -f docker && usermod -aG docker jenkins
-
-USER jenkins
 
 EXPOSE 8080 50000
