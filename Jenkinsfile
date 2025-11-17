@@ -1,16 +1,13 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "calculator-app"
-        IMAGE_TAG  = "latest"
-    }
-
     stages {
 
-        stage('Clean workspace') {
+        stage('Prep') {
             steps {
-                deleteDir()
+                // Just to see what's in the workspace
+                sh 'pwd'
+                sh 'ls -R'
             }
         }
 
@@ -22,11 +19,14 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh """
-                  docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                """
+                sh 'docker build -t calculator-app:latest .'
             }
         }
 
+        stage('Run Calculator Script') {
+            steps {
+                sh 'python3 calculator.py'
+            }
+        }
     }
 }
